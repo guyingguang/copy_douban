@@ -1,0 +1,119 @@
+<style lang="less">
+.quick-nav
+{
+    margin:40rpx 0 0 0;
+    .nav-menu 
+    {
+        float:left;
+        width:50%;
+        padding: 3px;
+        box-sizing: border-box;
+        font-size: 30rpx;
+        text
+        {
+            background-color: #f6f6f6;
+            color: #494949;
+            display: block;
+            text-align: center;
+            line-height: 20px;
+            padding: 12px 0;
+            border-radius: 2px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+    }
+    &:after{
+        content: " ";
+        display: block;
+        clear:both;
+    }
+}
+
+.recommend-feed {
+    margin-right: -18px;
+    margin-left: -18px;
+    margin-top: 2px;
+    color: #494949;
+    .feed-item {
+        display: block;
+        padding: 25px 18px 25px 0;
+        margin-left: 18px;
+        position: relative;
+        color: #494949;
+        border-bottom:1px solid #e6e6e6;
+        .feed-content {
+            overflow: hidden;
+            margin-bottom: 10px;
+            .cover {
+                width: 25.6%;
+                margin-left: 25px;
+                float: right;
+            }
+            .title {
+                text-align: justify;
+                font-size: 34rpx;
+                font-weight: 500;
+                line-height: 1.41;
+                color: #494949;
+                margin-bottom: 6px;
+            }
+            .desc {
+                overflow: hidden;
+                text-align: justify;
+                color: #aaa;
+                font-size: 24rpx;
+                line-height: 1.5;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+            }
+        }
+        .author {
+            font-size: 12px;
+            color: #ccc;
+        }
+    }
+    
+}
+</style>
+<template>
+    <view>
+        <view class="quick-nav">
+            <repeat for="{{quickMenu}}" key="index" item="item">
+                <view class="nav-menu">
+                    <text>{{item.name}}</text>
+                </view>
+            </repeat>
+        </view>
+        <view class="recommend-feed">
+            <view class="feed-view">
+                <view class="feed-item">
+                    <view class="feed-content">
+                        <view class="cover" 
+                        style="position: relative; background: url(https://img3.doubanio.com/view/note/sqs/public/p55667875.jpg) center center / cover no-repeat rgb(250, 250, 250);">
+                            <view style="padding-top: 100%;"></view>
+                        </view>
+                        <text class="title">人生的悲欢都在里边，想去记录点什么</text>
+                        <text class="desc">即使一切都会变，即使有一天城市化把独山的原始乡土气息尽数蚕食，仍会有饭叔一般的人——只愿做一个沉默的记录者，手捧相机，聚焦一个小家庭的柴米油盐，摩挲田野的质感，聆听山川的乡音，平淡地起伏于生活赐予的悲喜两端。 豆瓣ID名为“起床，吃饭”的陆庆屹，被豆友亲切地称为“饭叔”。2012年他发表了一篇叫作《我妈》的日记，一年后又写了一篇《我爸》。两篇文章真挚地展现了饭叔父⺟强大的人格魅⼒，在豆瓣被收藏过万。 在饭叔的笔下，父母对生活充满热情，真实可爱。...</text>
+                    </view>
+                    <view class="author">by <text class="name">我和豆瓣</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+
+    import wepy from 'wepy'
+    import { connect } from 'wepy-redux'
+
+    export default class Home extends wepy.page {
+        data={
+            quickMenu:[{id:1,name:'热门影院'},{id:2,name:'我的'},{id:3,name:'豆瓣时间'},{id:4,name:'使用豆瓣APP'}]
+        }
+    }
+</script>

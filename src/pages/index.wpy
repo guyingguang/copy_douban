@@ -1,0 +1,52 @@
+<style lang="less">
+.page {
+   padding: 47px 18px 0px;
+}
+</style>
+<template>
+  <view>
+    <head @childFn.user="demo"/>
+    <view class="page" wx:if="{{tapType==='home'}}">
+      <home/>
+    </view>
+    <view class="page" wx:if="{{tapType==='movie'}}">
+      <movie/>
+    </view>
+    <view class="page" wx:if="{{tapType==='book'}}">
+      <book/>
+    </view>
+  </view>
+</template>
+
+<script>
+
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import Head from '../components/head'
+  import Home from './home'
+  import Movie from './movie'
+  import Book from './book'
+
+  export default class Index extends wepy.page {
+      config = {
+        navigationBarTitleText: '模拟豆瓣'
+      }
+      components = 
+      {
+        head:Head,
+        home:Home,
+        movie:Movie,
+        book:Book
+      }
+      data={
+        tapType:'home'
+      }
+      onLoad(){}
+      methods={
+        demo(menuType){
+          console.log(menuType);
+          this.tapType=menuType;
+        }
+      }
+  }
+</script>

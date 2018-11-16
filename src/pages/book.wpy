@@ -1,0 +1,96 @@
+<style lang="less">
+.book-feed {
+    padding-top:10px;
+    margin:0px -18px;
+}
+.feed-view{
+    .book-feed-header {
+        padding: 0 1.12rem;
+        .header-title {
+            display: inline-block;
+            min-width: 4em;
+            margin-bottom: 0;
+            font-size: 32rpx;
+            color: #111;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+        .header-more {
+            float: right;
+            font-size: 30rpx;
+            line-height: 1.5rem;
+            color:#42bd56;
+        }
+    }
+    .book-feed-content {
+        margin-bottom: -1.12rem;
+        .book-scroll {
+            padding: 15px 0 35px 0;
+            white-space: nowrap;
+            .book-content {
+                width:100px;
+                height:100%;
+                margin-left: 0.48rem;
+                display: inline-block;
+                image {width:100%;height:142px;}
+                .book-title {
+                    width:100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: 28rpx;
+                    display: block;
+                    text-align: center;
+                }
+                &:first-child{
+                    margin-left: 1.12rem;
+                }
+                &:last-child{
+                    margin-right: 1.12rem;
+                }
+            }
+            
+        }
+        
+    }
+}
+</style>
+<template>
+    <view class="book-feed">
+        <view class="feed-view">
+            <view class="book-feed-header">
+                <text class="header-title">最受关注图书｜虚构类</text>
+                <text class="header-more">更多</text>
+            </view>
+            <view class="book-feed-content">
+                <scroll-view scroll-x="true" class="book-scroll">
+                    <repeat for="{{bookList}}" key="index" item="item">
+                        <view class="book-content" >
+                            <image src="{{item.images}}"></image>
+                            <text class="book-title">{{item.title}}</text>
+                        </view>
+                    </repeat>
+                </scroll-view>
+            </view>
+
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    import { connect } from 'wepy-redux'
+    export default class Book  extends wepy.page {
+        data={
+            bookList:[
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29840340.jpg",title:"遮蔽的天空"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29888408.jpg",title:"无中生有"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29814519.jpg",title:"十九年间谋杀小叙"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29890136.jpg",title:"回答不了"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29888548.jpg",title:"梦的化石"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29902192.jpg",title:"冬泳"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29860112.jpg",title:"漫长的告别"},
+                {images:"https://img1.doubanio.com/view/subject/l/public/s29871217.jpg",title:"非平面"}
+            ]
+        }
+    }
+</script>

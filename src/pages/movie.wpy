@@ -1,0 +1,159 @@
+<style lang="less">
+.movie-feed {
+    padding-top:10px;
+    margin:0px -18px;
+}
+.feed-view{
+    .movie-feed-header {
+        padding: 0 1.12rem;
+        .header-title {
+            display: inline-block;
+            min-width: 4em;
+            margin-bottom: 0;
+            font-size: 32rpx;
+            color: #111;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+        .header-more {
+            float: right;
+            font-size: 30rpx;
+            line-height: 1.5rem;
+            color:#42bd56;
+        }
+    }
+    .movie-feed-content {
+        margin-bottom: -1.12rem;
+        .movie-scroll {
+            padding: 15px 0 35px 0;
+            white-space: nowrap;
+            .movie-content {
+                width:100px;
+                height:100%;
+                margin-left: 0.48rem;
+                display: inline-block;
+                image {width:100%;height:142px;}
+                .movie-title {
+                    width:100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: 28rpx;
+                    display: block;
+                    text-align: center;
+                }
+                &:first-child{
+                    margin-left: 1.12rem;
+                }
+                &:last-child{
+                    margin-right: 1.12rem;
+                }
+            }
+            
+        }
+        
+    }
+}
+</style>
+<template>
+    <view class="movie-feed">
+        <view class="feed-view">
+            <view class="movie-feed-header">
+                <text class="header-title">影院热映</text>
+                <text class="header-more">更多</text>
+            </view>
+            <view class="movie-feed-content">
+                <scroll-view scroll-x="true" class="movie-scroll">
+                    <repeat for="{{movieList}}" key="index" item="item">
+                        <view class="movie-content" >
+                            <image src="{{item.images.small}}"></image>
+                            <text class="movie-title">{{item.title}}</text>
+                        </view>
+                    </repeat>
+                </scroll-view>
+            </view>
+
+            <view class="movie-feed-header">
+                <text class="header-title">免费在线观影</text>
+                <text class="header-more">更多</text>
+            </view>
+            <view class="movie-feed-content">
+                <scroll-view scroll-x="true" class="movie-scroll">
+                    <repeat for="{{freeMovieList}}" key="index" item="item">
+                        <view class="movie-content" >
+                            <image src="{{item.images}}"></image>
+                            <text class="movie-title">{{item.title}}</text>
+                        </view>
+                    </repeat>
+                </scroll-view>
+            </view>
+
+            <view class="movie-feed-header">
+                <text class="header-title">新片速递</text>
+                <text class="header-more">更多</text>
+            </view>
+            <view class="movie-feed-content">
+                <scroll-view scroll-x="true" class="movie-scroll">
+                    <repeat for="{{lastestMovieList}}" key="index" item="item">
+                        <view class="movie-content" >
+                            <image src="{{item.images}}"></image>
+                            <text class="movie-title">{{item.title}}</text>
+                        </view>
+                    </repeat>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy'
+    import { connect } from 'wepy-redux'
+    export default class Movie  extends wepy.page {
+        data={
+            movieList:[],
+            freeMovieList:[
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2537701268.jpg",title:"凌晨四点的重庆"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2523138791.jpg",title:"我是江小白 剧场版"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2539033188.jpg",title:"第12届中国金鹰电视艺术节颁奖典礼"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2534695097.jpg",title:"冲破天际"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2531116444.jpg",title:"独行"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2527775320.jpg",title:"长岛"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2524802955.jpg",title:"驯兔记"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2518143759.jpg",title:"霹雳奇幻 生死一剑"}
+            ],
+            lastestMovieList:[
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2502609156.jpg",title:"龙先生"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2509231583.jpg",title:"芦苇荡的时光"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2537244778.jpg",title:"坏种"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2484785393.jpg",title:"窈窕淑女前篇：红绪，花样的17岁"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2524347579.jpg",title:"超级苍蝇"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2537054509.jpg",title:"我的冤家是条狗"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2467859138.jpg",title:"安娜，我的爱"},
+                {images:"https://img1.doubanio.com/view/photo/m_ratio_poster/public/p2516145559.jpg",title:"基伯龙三日"}
+            ],
+        }
+        onLoad(){
+            let self=this;
+            self.getHotMoviesData();
+        }
+        async getHotMoviesData() {
+            let self=this;
+            let data=await this.getHotMovies();
+            self.movieList=data;
+            self.$apply();
+            console.log(self.movieList);
+        }
+        getHotMovies() {
+            console.log("movie");
+            return new Promise((resolve,reject)=>{
+                wx.request({
+                    url:"http://douban.uieee.com/v2/movie/in_theaters?start=0&count=8",
+                    header:{'Content-Type': 'application/xml'},
+                    success(res){
+                        resolve(res.data.subjects);
+                    }
+                })
+            }); 
+        }
+    }
+</script>
