@@ -1,6 +1,6 @@
 # 防移动版豆瓣
 
-采用[wepy](https://tencent.github.io/wepy/index.html)实现该应用，实现部分功能
+采用[wepy](https://tencent.github.io/wepy/index.html)实现该应用，并实现部分功能
 
 ## 接口
 只实现了影院热映一个[接口](http://douban.uieee.com/v2/movie/in_theaters)
