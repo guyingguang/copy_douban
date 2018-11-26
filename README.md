@@ -1,4 +1,4 @@
-# 防移动版豆瓣
+# 小程序防移动版豆瓣
 
 采用[wepy](https://tencent.github.io/wepy/index.html)实现该应用，并实现部分功能
 
